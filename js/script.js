@@ -24,6 +24,9 @@ class AddressBook {
             }
         }
     }
+    update(change){
+        
+    }
 }
 
 class Contact {
@@ -44,14 +47,9 @@ addressBook.add(pops);
 addressBook.add(eddie);
 addressBook.add(doc);
 
-//addressBook.deleteAt(1);
-//addressBook.deleteByName("Eddie");
-
-//console.log(addressBook);
-//addressBook.print();
 
 while(play) {
-    const userPrompt = prompt("Add, Remove, Print, or Quit?");
+    const userPrompt = prompt("Add, Remove, Print, Update, or Quit?");
     switch(userPrompt.toLowerCase()) {
         case "add":
             const name = prompt("Please enter a name:");
@@ -67,14 +65,23 @@ while(play) {
                 const index = prompt("Please enter index number to remove");
                 addressBook.deleteAt(index);
             } else if(answer.toLowerCase() === "name") {
-                const name = prompt("Please enter the name to remove");
+                const name = prompt("Please enter the name to remove (case sensitive)");
                 addressBook.deleteByName(name);
             }
             break;
         case "print":
             addressBook.print();
             break;
+        case "update":
+            const update = prompt("Which contact index would you like to update?");
+            const updateItem = prompt("Do you want to change the name, email, phone, or relation?");
+            const newValue = prompt(`What is the new ${updateItem}?`);
+            addressBook.contacts[update][updateItem] = newValue;
+            console.log(updateItem);
+            addressBook.print();
+            
         case "quit":
+            alert("See ya!");
             play = false;
             break;
         default:
